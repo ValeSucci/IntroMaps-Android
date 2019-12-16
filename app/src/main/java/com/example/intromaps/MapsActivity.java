@@ -8,12 +8,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -23,7 +21,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -36,21 +33,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        Map<String,LatLng> markers = new HashMap<>();
-        markers.put("Mi Casa",new LatLng(-16.544445, -68.076032));
-        markers.put("UPB",new LatLng(-16.574988, -68.126765));
-        markers.put("UPB Postgrado",new LatLng(-16.524708, -68.110473));
-        markers.put("Ñoños",new LatLng(-16.541517, -68.076256));
-        markers.put("Casa Vale",new LatLng(-16.538540, -68.046402));
-        markers.put("Casa Illi",new LatLng(-16.543410, -68.080144));
-        markers.put("Casa Eve - Tia",new LatLng(-16.542468, -68.0695911));
 
-        Iterator it = markers.keySet().iterator();
-        while (it.hasNext()){
-            String nameLoc = (String) it.next();
-            LatLng latLng = markers.get(nameLoc);
-            mMap.addMarker(new MarkerOptions().position(latLng).title(nameLoc));
+        int n = 7;
+        String[] markersNames = {"Mi Casa","UPB","UPB Postgrado","Ñoños","Casa Vale","Casa Illi","Casa Eve - Tia"};
+        double[] markersLat = {-16.544445,-16.574988,-16.524708,-16.541517,-16.538540,-16.543410,-16.542468};
+        double[] markersLng = {-68.076032,-68.126765,-68.110473,-68.076256,-68.046402,-68.080144,-68.0695911};
+        int[] markersIcon = {R.drawable.ic_home_marker,R.drawable.ic_building_marker,R.drawable.ic_building_marker,R.drawable.ic_building_marker,R.drawable.ic_user_marker_pink,R.drawable.ic_user_street_marker,R.drawable.ic_user_marker_blue};
+
+        for(int i=0; i<n; i++) {
+            String nameLoc = markersNames[i];
+            LatLng latLng = new LatLng(markersLat[i],markersLng[i]);
+            int icon = markersIcon[i];
+            mMap.addMarker(new MarkerOptions().position(latLng).title(nameLoc).icon(BitmapDescriptorFactory.fromResource(icon)));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
         }
+
     }
 }
