@@ -2,7 +2,7 @@
 Aplicación Android que implementa Mapas con Google - tarea Certi Android
 
 Screen:
-![ResultadoMaps](screen_maps.png?raw=true "Resultado Maps")
+![Resultado Maps](screen_maps.PNG?raw=true "Resultado Maps")
 
 Screen con zoom:
-![ResultadoMapsZoom](screen_maps_zoom.png?raw=true "Resultado Maps Zoom")
+![Resultado Maps Zoom](screen_maps_zoom.PNG?raw=true "Resultado Maps Zoom")
